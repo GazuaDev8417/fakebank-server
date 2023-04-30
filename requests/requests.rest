@@ -1,0 +1,76 @@
+GET http://localhost:3003/accounts
+
+###
+POST http://localhost:3003/accounts/create
+Content-Type: application/json
+
+{
+  "name": "Ana Novais",
+  "cpf": 12345678913,
+  "email": "vo@gmail.com",
+  "password": "senha",
+  "passwordConf": "senha",
+  "initialDate": "1933-03-26"
+}
+
+###
+POST http://localhost:3003/accounts/login
+Content-Type: application/json
+
+{
+  "email": "arena@bares.com",
+  "password": "123456"
+}
+
+###
+POST http://localhost:3003/accounts/balance
+Content-Type: application/json
+
+{
+  "cpf": 12345678911,
+  "password": "123456",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiZWExNTE4NDktN2VjMy00ZDAxLWEwZjAtY2NiYzZlNDVmOGMwIiwiaWF0IjoxNjczNDc5MjUxLCJleHAiOjE2NzM0ODI4NTF9.cebkjvJpmKR_9fBT348by8itGRKJPCo3TdEy66opwM4"  
+}
+
+###
+POST http://localhost:3003/accounts/statement
+Content-Type: application/json
+
+{
+  "email": "nena_esta@gmail.com",
+  "cpf": 12345678911
+}
+
+###
+POST http://localhost:3003/accounts/payment
+Content-Type: application/json
+
+{
+  "email": "nena_esta@gmail.com",
+  "cpf": "12345678911",
+  "initialDate": "10/12/2022",
+  "value": 100,
+  "description": "pagamento de prestação de cartão de crédito"
+}
+
+###
+POST http://localhost:3003/accounts/deposit
+Content-Type: application/json
+
+{
+  "email": "nena_esta@gmail.com",
+  "cpf": "12345678911",
+  "value": 100
+}
+
+###
+POST http://localhost:3003/accounts/transfer
+Content-Type: application/json
+
+{
+  "email":"nena_esta@gmail.com",
+  "cpf": 12345678911,
+  "recipientName": "Ana Novais",
+  "recipientCpf": 12345678910,
+  "value": 20
+}
