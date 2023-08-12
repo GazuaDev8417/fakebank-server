@@ -1,15 +1,19 @@
 GET http://localhost:3003/accounts
 
 ###
+GET http://localhost:3003/accounts/client
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiNzMyYmE4NzUtNWEyYy00MTZhLWI2NzgtMzA5MzdkZTlhOTljIiwiaWF0IjoxNjkxODczNDk0LCJleHAiOjE2OTE4NzUyOTR9.C0JpDzoYl49lJwOTQ-uhk395AX6IM921dX-_nhxChHQ
+
+###
 POST http://localhost:3003/accounts/create
 Content-Type: application/json
 
 {
-  "name": "Ana Novais",
-  "cpf": 12345678913,
-  "email": "vo@gmail.com",
-  "password": "senha",
-  "passwordConf": "senha",
+  "name": "Visitante",
+  "cpf": "12345678913",
+  "email": "visitante@email.com",
+  "password": "123456",
+  "passwordConf": "123456",
   "initialDate": "1933-03-26"
 }
 
@@ -18,27 +22,28 @@ POST http://localhost:3003/accounts/login
 Content-Type: application/json
 
 {
-  "email": "arena@bares.com",
+  "email": "visitante@email.com",
   "password": "123456"
 }
 
 ###
 POST http://localhost:3003/accounts/balance
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiMTc4NDU3YTItMThkNy00NmE4LWFmODAtMDViN2QwM2RlNGVjIiwiaWF0IjoxNjkxODgzNDU2LCJleHAiOjE2OTE4ODUyNTZ9.j66Ms1RHglT5FsJcJG_2GDM6kekLFmtFmYquolcfECw
 
 {
-  "cpf": 12345678911,
-  "password": "123456",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiZWExNTE4NDktN2VjMy00ZDAxLWEwZjAtY2NiYzZlNDVmOGMwIiwiaWF0IjoxNjczNDc5MjUxLCJleHAiOjE2NzM0ODI4NTF9.cebkjvJpmKR_9fBT348by8itGRKJPCo3TdEy66opwM4"  
+  "cpf": "12345678913",
+  "password": "123456"
 }
 
 ###
 POST http://localhost:3003/accounts/statement
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiMTc4NDU3YTItMThkNy00NmE4LWFmODAtMDViN2QwM2RlNGVjIiwiaWF0IjoxNjkxODgzNDU2LCJleHAiOjE2OTE4ODUyNTZ9.j66Ms1RHglT5FsJcJG_2GDM6kekLFmtFmYquolcfECw
 Content-Type: application/json
 
 {
-  "email": "nena_esta@gmail.com",
-  "cpf": 12345678911
+  "cpf": 12345678913,
+  "password": "123456"
 }
 
 ###
