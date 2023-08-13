@@ -89,6 +89,9 @@ export default class UserController{
     payment = async(req:Request, res:Response):Promise<void>=>{
         try{
 
+            await this.userBusiness.payment(req)
+
+            res.status(200).send('Pagamento efetuado')
         }catch(e:any){
             let statusCode = 400 || e.statusCode
             let message = e.error === undefined ? e.message : e.error.message

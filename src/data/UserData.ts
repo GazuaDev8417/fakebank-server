@@ -70,7 +70,7 @@ export default class UserData extends ConnectDatabase{
 
             await ConnectDatabase.con(this.USER_TABLE).update({
                 balance: user.balance - input.value
-            })
+            }).where({ cpf: user.cpf })
 
             await ConnectDatabase.con(this.STATEMENT_TABLE).insert(input)
 
