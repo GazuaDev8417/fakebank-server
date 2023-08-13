@@ -195,7 +195,54 @@ export default class UserBusiness{
         return statement
     }
 
-    payment = async():Promise<void>=>{
+    payment = async(req:Request):Promise<void>=>{
+        const user = await authToken(req)
+        const {password, cpf, initialDate, value, description } = req.body
+        const convert = initialDate.split('/')
+        const date = new Date(`${convert[2]}-${convert[1]}-${convert[0]}`)
 
+        if(!password || !cpf || !initialDate || !value || !description){
+            throw{
+                statusCode: 401,
+                error: new Error('Preencha os campos')
+            }
+        }
+
+        if(new Date(initialDate).getTime() < Date.now()){
+            throw{
+                statusCode: 403,
+                error: new Error('Data do pagagmento não pode ser inferior a atual!')
+            }
+        }
+
+        if(
+            !this.services.compare(password, user.password) ||
+            !this.services.compare(String(cpf), user.cpf)
+        ){
+            throw{
+                statusCode: 401,
+                error: new Error('Cliente não encontrado')
+            }
+        }
+
+        if(value > user.balance){
+            throw{
+                statusCode: 403,
+                error: new Error('Saldo insuficiente para efetuar pagamento!')
+            }
+        }
+
+        const id = this.services.idGenerator()
+        const client_id = user.cpf
+
+        const input:Statement = {
+            id,
+            value,
+            date,
+            description,
+            client_id
+        }
+
+        await this.userData.payment(input, user)
     }
 }

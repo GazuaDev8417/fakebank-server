@@ -48,13 +48,14 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3003/accounts/payment
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiMTc4NDU3YTItMThkNy00NmE4LWFmODAtMDViN2QwM2RlNGVjIiwiaWF0IjoxNjkxODg1NDQ1LCJleHAiOjE2OTE4ODcyNDV9.6UJoN0WCfGmn00EsiXGUbdyx46eeKbpdO70wqxkltA4
 Content-Type: application/json
 
 {
-  "email": "nena_esta@gmail.com",
-  "cpf": "12345678911",
-  "initialDate": "10/12/2022",
-  "value": 100,
+  "cpf": "12345678913",
+  "password": "123456",
+  "initialDate": "10/12/2023",
+  "value": 127,
   "description": "pagamento de prestação de cartão de crédito"
 }
 
