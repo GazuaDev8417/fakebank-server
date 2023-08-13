@@ -46,9 +46,8 @@ export default class UserBusiness{
             }
             
         }
-
-        let arrCpf = String(cpf).split('')
-        if(arrCpf.length !== 11){
+        
+        if(String(cpf).length !== 11){
             throw{
                 statusCode: 403,
                 error: new Error('CPF inválido!')
@@ -57,7 +56,7 @@ export default class UserBusiness{
 
         const registeredUser:User = await this.userData.findByEmail(email)  
         const clients = (await this.userData.showClients()).map(client=>{
-            return this.services.compare(cpf, client.cpf)
+            return this.services.compare(String(cpf), client.cpf)
         }) 
         
         if(registeredUser || clients[0]){
@@ -80,10 +79,10 @@ export default class UserBusiness{
                 error: new Error('As senhas não correspondem!')
             }
         }
-
+        
         const id = this.services.idGenerator()
         const hash = this.services.hash(password)
-        const hashCPF = this.services.hash(cpf.toString())
+        const hashCPF = this.services.hash(String(cpf))
         const token = this.services.token(id)
         const balance = 0
 
@@ -208,7 +207,7 @@ export default class UserBusiness{
             }
         }
 
-        if(new Date(initialDate).getTime() < Date.now()){
+        if(date.getTime() < Date.now()){
             throw{
                 statusCode: 403,
                 error: new Error('Data do pagagmento não pode ser inferior a atual!')
@@ -343,7 +342,7 @@ export default class UserBusiness{
                value,
                date: new Date(),
                description: `Transferência no valor ${value.toFixed(2)} para a conta de ${recipientName}`,
-               client_id: user.id
+               client_id: user.cpf
            },
            {
                id: this.services.idGenerator(),
