@@ -245,4 +245,117 @@ export default class UserBusiness{
 
         await this.userData.payment(input, user)
     }
+
+    deposit = async(req:Request):Promise<User>=>{
+        const user = await authToken(req)
+        const {password, cpf, value } = req.body
+
+        if(!password || !cpf || !value){
+            throw{
+                statusCode: 401,
+                error: new Error('Preencha os campos')
+            }
+        }
+
+        if(
+            !this.services.compare(password, user.password) ||
+            !this.services.compare(String(cpf), user.cpf)
+        ){
+            throw{
+                statusCode: 401,
+                error: new Error('Cliente não encontrado')
+            }
+        }
+
+        const id = this.services.idGenerator()
+        const client_id = user.cpf
+        const date = new Date()
+        const description = `Deposito no valor de R$ ${value.toFixed(2)}`
+
+        const input:Statement = {
+            id,
+            value,
+            date,
+            description,
+            client_id
+        }
+
+        await this.userData.deposit(input, user)
+
+        return user
+    }
+
+    transfer = async(req:Request):Promise<void>=>{
+        const user = await authToken(req)
+        const { password, cpf, recipientName, recipientCpf, value } = req.body
+
+        if(!password || !cpf || !recipientName || !recipientCpf || !value){
+            throw{
+                statusCdde: 401,
+                error: new Error('Preencha os campos')
+            }
+        }
+
+        if(recipientCpf === cpf){
+            throw{
+                statusCode: 403,
+                error: new Error('Os CPFs do depositante e destinatário são os mesmos')
+            }
+        }
+
+        if(
+            !this.services.compare(password, user.password) ||
+            !this.services.compare(String(cpf), user.cpf)
+        ){
+            throw{
+                statusCode: 401,
+                error: new Error('Cliente não encontrado')
+            }
+        }
+
+        const [recipients]:User[] = (await this.userData.showClients())
+            .filter(recipient=>{
+                return this.services.compare(String(recipientCpf), recipient.cpf)
+            })
+        
+        if(!recipients){
+            throw{
+                statusCode: 404,
+                error: new Error('Destinatário para transferência não localizado. Certifique-se de que essa pessoa possui a respectiva conta')
+            }
+        }else if(recipients.name !== recipientName){
+            throw{
+                statusCode: 404,
+                error: new Error('Nome e CPF do destinatário não correspondem')
+            }
+        }
+        
+        if(user.balance < value){
+            throw{
+                statusCode: 403,
+                error: new Error('Saldo insuficiente')
+            }
+        }
+
+        const input:Statement[] =[
+            {
+               id: this.services.idGenerator(),
+               value,
+               date: new Date(),
+               description: `Transferência no valor ${value.toFixed(2)} para a conta de ${recipientName}`,
+               client_id: user.id
+           },
+           {
+               id: this.services.idGenerator(),
+               value,
+               date: new Date(),
+               description: `Transferência no valor ${value.toFixed(2)} enviada por ${user.name}`,
+               client_id: recipients.cpf
+           }
+        ]
+        
+        for(let inputItem of input){
+            await this.userData.transfer(inputItem, user, recipients)
+        }
+    }
 }

@@ -78,4 +78,39 @@ export default class UserData extends ConnectDatabase{
             throw new Error(`Erro ao realizar pagamento: ${e}`)
         }
     }
+
+    deposit = async(input:Statement, user:User):Promise<void>=>{
+        try{
+
+            await ConnectDatabase.con(this.USER_TABLE).update({
+                balance: user.balance + input.value
+            }).where({ cpf: user.cpf })
+
+            await ConnectDatabase.con(this.STATEMENT_TABLE).insert(input)
+
+        }catch(e){
+            throw new Error(`Erro ao realizar deposito: ${e}`)
+        }
+    }
+
+    transfer = async(
+        input:Statement, user:User, recipient:User
+    ):Promise<void>=>{
+        try{
+
+            await ConnectDatabase.con(this.USER_TABLE).update({
+                balance: user.balance - input.value
+            }).where({ cpf: user.cpf })
+
+            await ConnectDatabase.con(this.USER_TABLE).update({
+                balance: recipient.balance + input.value
+            }).where({ cpf: recipient.cpf })
+
+            await ConnectDatabase.con(this.STATEMENT_TABLE).insert(input)
+
+        }catch(e){
+            throw new Error(`Erro ao realizar deposito: ${e}`)
+        }
+    }
+
 }
