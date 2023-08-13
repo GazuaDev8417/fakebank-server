@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const app_1 = require("./app");
+const UserBusiness_1 = __importDefault(require("./business/UserBusiness"));
+const UserController_1 = __importDefault(require("./controller/UserController"));
+const UserData_1 = __importDefault(require("./data/UserData"));
+const Services_1 = __importDefault(require("./services/Services"));
+const userController = new UserController_1.default(new UserBusiness_1.default(new UserData_1.default, new Services_1.default));
+app_1.app.post('/accounts/create', userController.signup);
+app_1.app.post('/accounts/login', userController.login);
+app_1.app.post('/accounts/balance', userController.balance);
+app_1.app.post('/accounts/statement', userController.getStatement);
+app_1.app.post('/accounts/payment', userController.payment);
+app_1.app.post('/accounts/deposit', userController.deposit);
+app_1.app.post('/accounts/transfer', userController.transfer);
+app_1.app.get('/accounts', userController.showClients);
+app_1.app.get('/accounts/client', userController.findById);

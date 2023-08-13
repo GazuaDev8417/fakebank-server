@@ -18,6 +18,7 @@ app.post('/accounts/login', userController.login)
 app.post('/accounts/balance', userController.balance)
 app.post('/accounts/statement', userController.getStatement)
 app.post('/accounts/payment', userController.payment)
-
+app.post('/accounts/deposit', userController.deposit)
+app.post('/accounts/transfer', userController.transfer)
 app.get('/accounts', userController.showClients)
 app.get('/accounts/client', userController.findById)

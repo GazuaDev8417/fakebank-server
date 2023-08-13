@@ -9,9 +9,9 @@ POST http://localhost:3003/accounts/create
 Content-Type: application/json
 
 {
-  "name": "Visitante",
-  "cpf": "12345678913",
-  "email": "visitante@email.com",
+  "name": "Visitante2",
+  "cpf": "12345678911",
+  "email": "visitante2@email.com",
   "password": "123456",
   "passwordConf": "123456",
   "initialDate": "1933-03-26"
@@ -61,22 +61,24 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3003/accounts/deposit
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiMTc4NDU3YTItMThkNy00NmE4LWFmODAtMDViN2QwM2RlNGVjIiwiaWF0IjoxNjkxODg3MTA3LCJleHAiOjE2OTE4ODg5MDd9.Lf79pwMxF0zPWAXSIXHkt4MMbu5GfMVhxPIttcycy9w
 Content-Type: application/json
 
 {
-  "email": "nena_esta@gmail.com",
-  "cpf": "12345678911",
-  "value": 100
+  "cpf": "12345678913",
+  "password": "123456",
+  "value": 85
 }
 
 ###
 POST http://localhost:3003/accounts/transfer
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiMTc4NDU3YTItMThkNy00NmE4LWFmODAtMDViN2QwM2RlNGVjIiwiaWF0IjoxNjkxODkyNTY3LCJleHAiOjE2OTE4OTQzNjd9.gwt9KZ8j0RROt8H6meJV2YQoNjg-VIlX_x8br6bbLuk
 Content-Type: application/json
 
 {
-  "email":"nena_esta@gmail.com",
-  "cpf": 12345678911,
-  "recipientName": "Ana Novais",
-  "recipientCpf": 12345678910,
+  "cpf": 12345678913,
+  "password":"123456",
+  "recipientName": "Visitante2",
+  "recipientCpf": 12345678911,
   "value": 20
 }

@@ -98,4 +98,32 @@ export default class UserController{
             res.status(statusCode).send(message || e.sqlMessage)
         }
     }
+
+    deposit = async(req:Request, res:Response):Promise<void>=>{
+        const { value } = req.body
+        try{
+
+            const user = await this.userBusiness.deposit(req)
+            
+            res.status(200).send(`Deposito realizado com sucesso. Saldo atual: R$ ${(user.balance + value).toFixed(2)}`)
+        }catch(e:any){
+            let statusCode = 400 || e.statusCode
+            let message = e.error === undefined ? e.message : e.error.message
+            res.status(statusCode).send(message || e.sqlMessage)
+        }
+    }
+
+    transfer = async(req:Request, res:Response):Promise<void>=>{
+        const { value, recipientName } = req.body
+        try{
+            
+            await this.userBusiness.transfer(req)
+
+            res.status(200).send(`Vocẽ tranferênciu R$ ${value.toFixed(2)} para a conta de ${recipientName}`)
+        }catch(e:any){
+            let statusCode = 400 || e.statusCode
+            let message = e.error === undefined ? e.message : e.error.message
+            res.status(statusCode).send(message || e.sqlMessage)
+        }
+    }
 }
