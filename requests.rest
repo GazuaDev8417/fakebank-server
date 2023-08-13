@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3003/accounts/login
+POST https://fakebank-server.vercel.app/accounts/login
 Content-Type: application/json
 
 {
@@ -27,9 +27,9 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3003/accounts/balance
+POST https://fakebank-server.vercel.app/accounts/balance
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiMTc4NDU3YTItMThkNy00NmE4LWFmODAtMDViN2QwM2RlNGVjIiwiaWF0IjoxNjkxODgzNDU2LCJleHAiOjE2OTE4ODUyNTZ9.j66Ms1RHglT5FsJcJG_2GDM6kekLFmtFmYquolcfECw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiMTc4NDU3YTItMThkNy00NmE4LWFmODAtMDViN2QwM2RlNGVjIiwiaWF0IjoxNjkxOTMxOTkwLCJleHAiOjE2OTE5MzM3OTB9.e_Y-6ed6F8K0U-bg6Qhpp54SIc7LO3kCbRI3F47NAWs
 
 {
   "cpf": "12345678913",
