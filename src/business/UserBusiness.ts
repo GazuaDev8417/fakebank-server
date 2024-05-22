@@ -31,7 +31,7 @@ export default class UserBusiness{
 		const birthDate = new Date(`${year}-${month}-${day}`)
 		const millisecondsAge = Date.now() - birthDate.getTime()
 		const age = millisecondsAge / 1000 / 60 / 60 /24 / 365
-
+        
         if(!name || !cpf || !initialDate || !email || !password || !passwordConf){
             throw{
                 statusCode: 401,
@@ -45,13 +45,6 @@ export default class UserBusiness{
                 error: new Error('Necessário ser maior de idade!')
             }
             
-        }
-        
-        if(String(cpf).length !== 11){
-            throw{
-                statusCode: 403,
-                error: new Error('CPF inválido!')
-            }
         }
 
         const registeredUser:User = await this.userData.findByEmail(email)  
