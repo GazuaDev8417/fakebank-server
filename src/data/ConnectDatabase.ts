@@ -8,15 +8,16 @@ config()
 
 export default abstract class ConnectDatabase{
     protected static con = knex({
-        client: 'mysql2',
+        client: 'pg',
+        connection: 'postgresql://GazuaDev8417:oyxXs5u0rZim@ep-green-dew-a56t2dck.us-east-2.aws.neon.tech/fakebank?sslmode=require'
         
-        connection: {
+        /* connection: {
             host: 'localhost',
 			user: 'root',
 			password: 'alfadb',
 			database: 'fakebank_db',
 			multipleStatements: true
-        }
+        } */
     })
 
     public static testConnection = async():Promise<void>=>{
