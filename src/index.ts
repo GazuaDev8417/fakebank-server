@@ -12,7 +12,7 @@ const userController = new UserController(
     )
 )
 
-app.get('/', userController.showTables)
+//app.get('/', userController.showTables)
 
 app.post('/accounts/create', userController.signup)
 app.post('/accounts/login', userController.login)
