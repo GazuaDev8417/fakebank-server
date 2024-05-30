@@ -1,24 +1,28 @@
+GET http://localhost:3003/
+
+###
+
 GET http://localhost:3003/accounts
 
 ###
 GET http://localhost:3003/accounts/client
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiNzMyYmE4NzUtNWEyYy00MTZhLWI2NzgtMzA5MzdkZTlhOTljIiwiaWF0IjoxNjkxODczNDk0LCJleHAiOjE2OTE4NzUyOTR9.C0JpDzoYl49lJwOTQ-uhk395AX6IM921dX-_nhxChHQ
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiOTExNDI4YzAtY2E4ZS00ZTZkLTlhMGUtYzZkZWRkNzI1NjM2IiwiaWF0IjoxNzE2ODgxNjI5LCJleHAiOjE3MTY4ODM0Mjl9.d_ZQrh4hdh3k3kCpQCdDbBZUBIt7T4DRi2_PT5W7VIwj
 ###
 POST http://localhost:3003/accounts/create
 Content-Type: application/json
 
 {
-  "name": "Visitante2",
+  "name": "Visitante",
   "cpf": "12345678911",
-  "email": "visitante2@email.com",
+  "email": "visitante@email.com",
   "password": "123456",
   "passwordConf": "123456",
   "initialDate": "1933-03-26"
 }
 
 ###
-POST https://fakebank-server.vercel.app/accounts/login
+#POST https://fakebank-server.vercel.app/accounts/login
+POST http://localhost:3003/accounts/login
 Content-Type: application/json
 
 {

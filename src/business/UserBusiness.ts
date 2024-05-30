@@ -12,6 +12,12 @@ export default class UserBusiness{
         private services:Services
     ){}
 
+    showTables = async():Promise<object>=>{
+        const tables = await this.userData.showTables()
+
+        return tables
+    }
+
 
     showClient = async():Promise<User[]>=>{
         const clients = await this.userData.showClients()
@@ -116,7 +122,7 @@ export default class UserBusiness{
         if(!compare){
             throw{
                 statusCode: 403,
-                error: new Error('Cliente não encontrado (senha incorreta)')
+                error: new Error('Cliente não encontrado')
             }
         }
 

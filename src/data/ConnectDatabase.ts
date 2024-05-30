@@ -10,13 +10,13 @@ export default abstract class ConnectDatabase{
     protected static con = knex({
         client: 'mysql2',
         
-        /* connection: {
+        connection: {
             host: 'localhost',
 			user: 'root',
 			password: 'alfadb',
-			database: 'fakebank',
+			database: 'fakebank_db',
 			multipleStatements: true
-        } */
+        }
     })
 
     public static testConnection = async():Promise<void>=>{

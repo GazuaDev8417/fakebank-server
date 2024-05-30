@@ -8,11 +8,24 @@ export default class UserData extends ConnectDatabase{
     protected USER_TABLE = 'labebank'
     protected STATEMENT_TABLE = 'labebank_statement'
 
+    showTables = async():Promise<object>=>{
+        try{
+
+            const users = await ConnectDatabase.con(this.USER_TABLE)
+            //const bank = await ConnectDatabase.con(this.STATEMENT_TABLE)
+
+            return { users }
+
+        }catch(e){
+            throw new Error(`Erro ao buscar tabela: ${e}`)
+        }
+    }
+
 
     findByEmail = async(email:string):Promise<User>=>{
         try{
-
-            const [user]:User[] = await ConnectDatabase.con(this.USER_TABLE).where({ email })
+            
+            const [user] = await ConnectDatabase.con(this.USER_TABLE).where({ email })
 
             return user
         }catch(e){

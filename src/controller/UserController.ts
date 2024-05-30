@@ -8,6 +8,20 @@ export default class UserController{
         private userBusiness:UserBusiness
     ){}
 
+    showTables = async(req:Request, res:Response):Promise<void>=>{
+        try{
+
+            const tables = await this.userBusiness.showTables()
+
+            res.status(200).send(tables)
+        }catch(e:any){
+            let statusCode = 400 || e.statusCode
+            let message = e.error === undefined ? e.message : e.error.message
+            res.status(statusCode).send(message || e.sqlMessage)
+
+        }
+    }
+
     signup = async(req:Request, res:Response):Promise<void>=>{
         try{
 
