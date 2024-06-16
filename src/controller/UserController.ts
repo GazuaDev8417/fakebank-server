@@ -8,7 +8,7 @@ export default class UserController{
         private userBusiness:UserBusiness
     ){}
 
-    showTables = async(req:Request, res:Response):Promise<void>=>{
+    /* showTables = async(req:Request, res:Response):Promise<void>=>{
         try{
 
             const tables = await this.userBusiness.showTables()
@@ -20,7 +20,7 @@ export default class UserController{
             res.status(statusCode).send(message || e.sqlMessage)
 
         }
-    }
+    } */
 
     signup = async(req:Request, res:Response):Promise<void>=>{
         try{

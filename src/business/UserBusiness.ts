@@ -12,11 +12,11 @@ export default class UserBusiness{
         private services:Services
     ){}
 
-    showTables = async():Promise<object>=>{
+    /* showTables = async():Promise<object>=>{
         const tables = await this.userData.showTables()
 
         return tables
-    }
+    } */
 
 
     showClient = async():Promise<User[]>=>{
