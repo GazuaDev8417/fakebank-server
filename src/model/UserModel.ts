@@ -7,7 +7,7 @@ export default class UserModel extends ConnectDatabase{
         private id:string,
         private name:string,
         private cpf:string,
-        private birth_date:string,
+        private birth_date:Date,
         private balance:number,
         private email:string,
         private password:string

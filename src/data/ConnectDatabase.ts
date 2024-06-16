@@ -9,13 +9,13 @@ config()
 export default abstract class ConnectDatabase{
     protected static con = knex({
         client: 'pg',
-        connection: 'postgresql://GazuaDev8417:oyxXs5u0rZim@ep-green-dew-a56t2dck.us-east-2.aws.neon.tech/fakebank?sslmode=require'
+        connection: process.env.NEON_TECH_DB
         
         /* connection: {
-            host: 'localhost',
-			user: 'root',
-			password: 'alfadb',
-			database: 'fakebank_db',
+            host: process.env.DB_HOST,
+			user: process.env.DB_USER,
+			password: process.env.DB_PASSWORD,
+			database: process.env.DB_SCHEMA,
 			multipleStatements: true
         } */
     })
